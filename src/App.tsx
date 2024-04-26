@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import '@/app.css';
 import '@/app.less';
 
@@ -13,9 +13,25 @@ function App() {
     <h2>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/pageA' element={<PageA />} />
-        <Route path='/pageB' element={<PageB />} />
+        <Route
+          path='/pageA'
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <PageA />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path='/pageB'
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <PageB />
+            </React.Suspense>
+          }
+        />
       </Routes>
+      <NavLink to='pageA'>pageA</NavLink>
+      <NavLink to='pageB'>pageB</NavLink>
     </h2>
   );
 }
